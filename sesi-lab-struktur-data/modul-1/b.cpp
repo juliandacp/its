@@ -8,7 +8,7 @@ struct priority{
     bool operator<(const priority& other) const{
         if(P == other.P) return T < other.T;
         return P < other.P;
-}
+    }
 };
 
 int main(){

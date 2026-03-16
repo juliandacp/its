@@ -10,9 +10,7 @@ int main(){
             char x;
             cin >> x;
             s.push_front(x);
-        }else if(perintah == "BACKSPACE"){
-            s.pop_front();
-        }
+        }else if(perintah == "BACKSPACE") s.pop_front();
     }
     while(!s.empty()){
         cout << s.back();
