@@ -1,3 +1,5 @@
+<div align=center>
+
 |    NRP     |           Nama                |
 | :--------: |       :------------:          |
 | 5025251028 | Julianda Caesar Prkaoso       |
@@ -156,12 +158,12 @@ if __name__ == "__main__":
 
 ### Screenshot & Video
 - Input & Output
-![Alt Text](komputasi-numerik/praktikum-1/assets/praktikum-1-1.png)
+![Alt Text](assets/praktikum-1-1.png)
 
 - Grafik
 Source video:
 `https://drive.google.com/file/d/1SIVxwTsYrHoXD2mA0Oz2P6kQgwpNQ0Wo/view?usp=drive_link` 
-![Alt Text](komputasi-numerik/praktikum-1/assets/praktikum-1-2.png)
+![Alt Text](assets/praktikum-1-2.png)
 
 ### Kode Penuh
 
