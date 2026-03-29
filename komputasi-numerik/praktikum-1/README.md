@@ -160,7 +160,7 @@ if __name__ == "__main__":
 - Input & Output
 ![Alt Text](assets/praktikum-1-1.png)
 
-- Grafik dan Video:
+- Grafik & Video:
 `https://drive.google.com/file/d/1SIVxwTsYrHoXD2mA0Oz2P6kQgwpNQ0Wo/view?usp=drive_link` 
 ![Alt Text](assets/praktikum-1-2.png)
 
