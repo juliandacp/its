@@ -22,24 +22,22 @@ void dequeue(){
         cout << "Antrian kosong" << endl;
         return;
     }
-    cout << antrian[front] << " sedang dilayani\n";
+    cout << antrian[front] << " sedang dilayani" << endl;
     front++;
     if(front > rear) front = rear = -1;
 }
 
-void display() {
+void display(){
     if(front == -1 || front > rear){
-        cout << "Antrian kosong\n";
+        cout << "Antrian kosong" << endl;
         return;
     }
     cout << "Isi antrian: ";
-    for (int i = front; i <= rear; i++){
-        cout << antrian[i] << " ";
-    }
+    for(int i = front; i <= rear; i++) cout << antrian[i] << " ";
     cout << endl;
 }
 
-int main() {
+int main(){
     enqueue("A");
     enqueue("B");
     enqueue("C");
