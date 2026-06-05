@@ -126,7 +126,7 @@ int main() {
     // 3 & 5. Menghubungkan Relasi Pertemanan dengan Bobot Kedekatan
     sosmed.set_user_name(0, "Andi");
     sosmed.set_user_name(1, "Budi");
-    sosmed.set_user_name(2, "Cndi");
+    sosmed.set_user_name(2, "Cindi");
     sosmed.set_user_name(3, "Dodi");
     sosmed.set_user_name(4, "Edi");
     sosmed.set_user_name(5, "Faldi");
