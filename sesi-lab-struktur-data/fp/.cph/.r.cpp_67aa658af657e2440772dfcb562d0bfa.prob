@@ -1,0 +1,1 @@
+{"name":"Local: r","url":"c:\\Users\\LOQ\\Documents\\Coding\\ITS\\sesi-lab-struktur-data\\fp\\r.cpp","tests":[{"id":1780984182265,"input":"8\nADD 50\nADD 20\nBUY\nADD 10\nADD 40\nBUY\nBUY\nBUY","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\LOQ\\Documents\\Coding\\ITS\\sesi-lab-struktur-data\\fp\\r.cpp","group":"local","local":true}
