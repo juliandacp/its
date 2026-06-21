@@ -2,10 +2,8 @@
 #define ll long long
 using namespace std;
 
-/* ==========================
-   HASH TABLE (LOGIN)
-   ========================== */
-struct Mahasiswa {
+// Hash Table (Login)
+struct Mahasiswa{
     string nim;
     string nama;
     string prodi;
@@ -13,70 +11,48 @@ struct Mahasiswa {
     string password;
 };
 
-unordered_map<string, Mahasiswa> akun;
+unordered_map<string, Mahasiswa> akun_mahasiswa;
 
-/* ==========================
-   LINKED LIST (RIWAYAT)
-   ========================== */
-list<string> riwayat;
+// Linked List (Riwayat)
+list<string> riwayat_aktivitas;
 
-/* ==========================
-   QUEUE (ANTRIAN KONSULTASI)
-   ========================== */
+// Queue (Antrian Konsultasi)
 struct Konsultasi {
     string nim;
     string nama;
     string dosen;
 };
 
-queue<Konsultasi> antrianKonsultasi;
+queue<Konsultasi> antrian_konsultasi;
 
-/* ==========================
-   TREE (STRUKTUR ORGANISASI)
-   ========================== */
-struct TreeNode {
+// Tree (Struktur Organisasi)
+struct TreeNode{
     string nama;
     vector<TreeNode*> child;
-
-    TreeNode(string n) {
+    TreeNode(string n){
         nama = n;
     }
 };
 
-void tampilTree(TreeNode* root, int level = 0) {
-    for(int i=0;i<level;i++) cout << "   ";
+void tampil_tree(TreeNode* root, int level = 0){
+    for(int i = 0; i < level; i++) cout << "   ";
     cout << "- " << root->nama << endl;
-
-    for(auto c : root->child)
-        tampilTree(c, level + 1);
+    for(auto c : root->child) tampil_tree(c, level + 1);
 }
 
-/* ==========================
-   GRAPH (NAVIGASI KAMPUS)
-   ========================== */
+// Graph (Navigasi Kampus)
 const int V = 5;
-string lokasi[V] = {
-    "Gerbang Utama",
-    "Fakultas Teknik",
-    "Perpustakaan",
-    "Kantin",
-    "Rektorat"
-};
+string lokasi_kampus[V] = {"Gerbang Utama", "Fakultas Teknik", "Perpustakaan", "Kantin", "Rektorat"};
+vector<pair<int,int>> graph_kampus[V];
 
-vector<pair<int,int>> graph[V];
-
-void tambahJalan(int u, int v, int w){
-    graph[u].push_back({v,w});
-    graph[v].push_back({u,w});
+void tambah_jalan(int u, int v, int w){
+    graph_kampus[u].push_back({v,w});
+    graph_kampus[v].push_back({u,w});
 }
 
 void dijkstra(int start){
     vector<int> dist(V, INT_MAX);
-    priority_queue<
-        pair<int,int>,
-        vector<pair<int,int>>,
-        greater<pair<int,int>>
-    > pq;
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
 
     dist[start] = 0;
     pq.push({0,start});
@@ -88,7 +64,7 @@ void dijkstra(int start){
 
         if(d > dist[u]) continue;
 
-        for(auto edge : graph[u]){
+        for(auto edge : graph_kampus[u]){
             int v = edge.first;
             int w = edge.second;
 
@@ -99,58 +75,55 @@ void dijkstra(int start){
         }
     }
 
-    cout << "\nRute dari " << lokasi[start] << endl;
-    for(int i=0;i<V;i++){
-        cout << lokasi[i] << " = ";
+    cout << endl << "Rute dari " << lokasi_kampus[start] << endl;
+
+    for(int i = 0; i < V; i++){
+        cout << lokasi_kampus[i] << " = ";
         cout << dist[i] << endl;
     }
 }
 
-/* ==========================
-   STACK (UNDO KRS)
-   ========================== */
-stack<string> krs;
+// Stack (Undo KRS)
+struct MataKuliah{
+    string kode;
+    string nama;
+};
 
-void tampilKRS() {
-    stack<string> temp = krs;
+stack<MataKuliah> stack_krs;
 
-    vector<string> data;
+void tampil_krs(){
+    stack<MataKuliah> temp = stack_krs;
+    vector<MataKuliah> data;
 
     while(!temp.empty()){
         data.push_back(temp.top());
         temp.pop();
     }
 
-    cout << "\nDaftar Mata Kuliah:\n";
+    cout << endl << "Daftar Mata Kuliah:" << endl;
 
-    for(int i=data.size()-1;i>=0;i--)
-        cout << data[i] << endl;
+    for(int i = data.size() - 1; i >= 0; i--) cout << data[i].kode << " - " << data[i].nama << endl;
 }
 
-/* ==========================
-   PRIORITY QUEUE
-   ========================== */
-struct Layanan {
+// Priority Queue
+struct Layanan{
     int prioritas;
     string nama;
 
-    bool operator<(const Layanan& other) const {
+    bool operator<(const Layanan& other) const{
         return prioritas > other.prioritas;
     }
 };
 
-priority_queue<Layanan> layanan;
+priority_queue<Layanan> layanan_prioritas;
 
-/* ==========================
-   MENU
-   ========================== */
+// Menu
 
-void registrasi() {
+void registrasi(){
     Mahasiswa m;
 
     cout << "NIM      : ";
     cin >> m.nim;
-
     cin.ignore();
 
     cout << "Nama     : ";
@@ -165,49 +138,39 @@ void registrasi() {
     cout << "Password : ";
     cin >> m.password;
 
-    akun[m.nim] = m;
+    akun_mahasiswa[m.nim] = m;
 
-    cout << "\nRegistrasi berhasil!\n";
+    cout << endl << "Registrasi berhasil!" << endl;
 }
 
-void login() {
-    string nim, pass;
+void login(){
+    string nim, pw;
 
     cout << "NIM      : ";
     cin >> nim;
 
     cout << "Password : ";
-    cin >> pass;
+    cin >> pw;
 
-    if(akun.count(nim) && akun[nim].password == pass){
-        cout << "\nLogin berhasil\n";
-
-        riwayat.push_back("Login oleh " + akun[nim].nama);
-    }
-    else{
-        cout << "\nLogin gagal\n";
-    }
+    if(akun_mahasiswa.count(nim) && akun_mahasiswa[nim].password == pw){
+        cout << endl << "Login berhasil" << endl;
+        riwayat_aktivitas.push_back("Login oleh " + akun_mahasiswa[nim].nama);
+    }else cout << endl << "Login gagal" << endl;
 }
 
-void cariAkun() {
+void cari_akun(){
     string nim;
 
     cout << "Masukkan NIM : ";
     cin >> nim;
 
-    if(akun.count(nim)){
-        cout << "\nNama : "
-             << akun[nim].nama << endl;
-
-        cout << "Prodi : "
-             << akun[nim].prodi << endl;
-    }
-    else{
-        cout << "Data tidak ditemukan\n";
-    }
+    if(akun_mahasiswa.count(nim)){
+        cout << endl << "Nama : " << akun_mahasiswa[nim].nama << endl;
+        cout << "Prodi : " << akun_mahasiswa[nim].prodi << endl;
+    }else cout << "Data tidak ditemukan" << endl;
 }
 
-void tambahRiwayat() {
+void tambah_riwayat(){
     string aktivitas;
 
     cin.ignore();
@@ -215,161 +178,163 @@ void tambahRiwayat() {
     cout << "Aktivitas : ";
     getline(cin, aktivitas);
 
-    riwayat.push_back(aktivitas);
+    riwayat_aktivitas.push_back(aktivitas);
 }
 
-void tampilRiwayat() {
-    cout << "\n=== RIWAYAT ===\n";
+void tampil_riwayat(){
+    cout << endl << "=== RIWAYAT ===" << endl;
 
-    for(auto x : riwayat)
-        cout << x << endl;
+    for(auto x : riwayat_aktivitas) cout << x << endl;
 }
 
-void ambilAntrian() {
+void ambil_antrian(){
     Konsultasi k;
 
     cin.ignore();
 
     cout << "Nama  : ";
-    getline(cin,k.nama);
+    getline(cin, k.nama);
 
     cout << "NIM   : ";
-    getline(cin,k.nim);
+    getline(cin, k.nim);
 
     cout << "Dosen : ";
-    getline(cin,k.dosen);
+    getline(cin, k.dosen);
 
-    antrianKonsultasi.push(k);
+    antrian_konsultasi.push(k);
 
-    cout << "Berhasil masuk antrian\n";
+    cout << "Berhasil masuk antrian" << endl;
 }
 
-void layaniAntrian() {
-    if(antrianKonsultasi.empty()){
+void layani_antrian(){
+    if(antrian_konsultasi.empty()){
         cout << "Tidak ada antrian\n";
         return;
     }
 
-    Konsultasi k = antrianKonsultasi.front();
-    antrianKonsultasi.pop();
+    Konsultasi k = antrian_konsultasi.front();
+    antrian_konsultasi.pop();
 
-    cout << "\nDilayani:\n";
+    cout << endl << "Dilayani:" << endl;
     cout << k.nama << " - " << k.dosen << endl;
 }
 
-void tambahMK() {
-    string mk;
+void tambah_mk(){
+    MataKuliah mk;
 
     cin.ignore();
 
     cout << "Kode MK : ";
-    getline(cin,mk);
+    getline(cin, mk.kode);
 
-    krs.push(mk);
+    cout << "Nama MK : ";
+    getline(cin, mk.nama);
 
-    cout << "Mata kuliah ditambahkan\n";
+    stack_krs.push(mk);
+
+    cout << "Mata kuliah ditambahkan" << endl;
 }
 
-void undoMK() {
-    if(krs.empty()){
-        cout << "Tidak ada data\n";
+void undo_mk(){
+    if(stack_krs.empty()){
+        cout << "Tidak ada data" << endl;
         return;
     }
 
-    cout << "Undo: "
-         << krs.top()
-         << endl;
+    cout << "Undo: " << stack_krs.top().kode << " - " << stack_krs.top().nama << endl;
 
-    krs.pop();
+    stack_krs.pop();
 }
 
-void tambahPrioritas() {
+void tambah_prioritas(){
     Layanan l;
 
     cin.ignore();
 
     cout << "Nama Mahasiswa : ";
-    getline(cin,l.nama);
+    getline(cin, l.nama);
 
     cout << "Prioritas (1 tertinggi): ";
     cin >> l.prioritas;
 
-    layanan.push(l);
+    layanan_prioritas.push(l);
 }
 
-void layaniPrioritas() {
-    if(layanan.empty()){
+void layani_prioritas(){
+    if(layanan_prioritas.empty()){
         cout << "Tidak ada layanan\n";
         return;
     }
 
-    auto x = layanan.top();
-    layanan.pop();
+    auto x = layanan_prioritas.top();
+    layanan_prioritas.pop();
 
-    cout << "\nDilayani : "
-         << x.nama
-         << " (Prioritas "
-         << x.prioritas
-         << ")\n";
+    cout << endl << "Dilayani : " << x.nama << " (Prioritas " << x.prioritas << ")" << endl;
 }
 
-int main() {
-
-    /* Struktur Organisasi */
+int main(){
+    // Struktur Organisasi ITS
     TreeNode* rektor = new TreeNode("Rektor");
+    TreeNode* wr_akademik = new TreeNode("WR Akademik");
+    TreeNode* wr_kemahasiswaan = new TreeNode("WR Kemahasiswaan");
 
-    TreeNode* wrAkademik =
-        new TreeNode("WR Akademik");
+    // Fakultas
+    TreeNode* fteic = new TreeNode("Fakultas Teknologi Elektro dan Informatika Cerdas");
+    TreeNode* fsad = new TreeNode("Fakultas Sains dan Analitika Data");
+    TreeNode* ftirs = new TreeNode("Fakultas Teknologi Industri dan Rekayasa Sistem");
+    TreeNode* ftspk = new TreeNode("Fakultas Teknik Sipil, Perencanaan, dan Kebumian");
+    TreeNode* ftk = new TreeNode("Fakultas Teknologi Kelautan");
+    TreeNode* fkbd = new TreeNode("Fakultas Desain Kreatif dan Bisnis Digital");
+    TreeNode* vokasi = new TreeNode("Fakultas Vokasi");
+    TreeNode* fkk = new TreeNode("Fakultas Kedokteran dan Kesehatan");
 
-    TreeNode* wrKemahasiswaan =
-        new TreeNode("WR Kemahasiswaan");
+    // Hubungan Tree
+    rektor->child.push_back(wr_akademik);
+    rektor->child.push_back(wr_kemahasiswaan);
 
-    TreeNode* teknik =
-        new TreeNode("Fakultas Teknik");
+    wr_akademik->child.push_back(fteic);
+    wr_akademik->child.push_back(fsad);
+    wr_akademik->child.push_back(ftirs);
+    wr_akademik->child.push_back(ftspk);
+    wr_akademik->child.push_back(ftk);
+    wr_akademik->child.push_back(fkbd);
+    wr_akademik->child.push_back(vokasi);
+    wr_akademik->child.push_back(fkk);
 
-    TreeNode* ekonomi =
-        new TreeNode("Fakultas Ekonomi");
-
-    rektor->child.push_back(wrAkademik);
-    rektor->child.push_back(wrKemahasiswaan);
-
-    wrAkademik->child.push_back(teknik);
-    wrAkademik->child.push_back(ekonomi);
-
-    /* Graph Kampus */
-    tambahJalan(0,1,2);
-    tambahJalan(0,2,4);
-    tambahJalan(1,2,1);
-    tambahJalan(1,3,7);
-    tambahJalan(2,4,3);
-    tambahJalan(4,3,2);
+    // Graph Kampus
+    tambah_jalan(0,1,2);
+    tambah_jalan(0,2,4);
+    tambah_jalan(1,2,1);
+    tambah_jalan(1,3,7);
+    tambah_jalan(2,4,3);
+    tambah_jalan(4,3,2);
 
     int pilih;
 
-    do {
-        cout << "\n=================================\n";
-        cout << "SMART CAMPUS NAVIGATION SYSTEM\n";
-        cout << "=================================\n";
-        cout << "1. Registrasi\n";
-        cout << "2. Login\n";
-        cout << "3. Cari Akun\n";
-        cout << "4. Tambah Riwayat\n";
-        cout << "5. Tampil Riwayat\n";
-        cout << "6. Ambil Antrian Konsultasi\n";
-        cout << "7. Layani Antrian\n";
-        cout << "8. Tampil Struktur Organisasi\n";
-        cout << "9. Navigasi Kampus (Dijkstra)\n";
-        cout << "10. Tambah KRS\n";
-        cout << "11. Undo KRS\n";
-        cout << "12. Tampil KRS\n";
-        cout << "13. Tambah Prioritas Layanan\n";
-        cout << "14. Layani Prioritas\n";
-        cout << "0. Keluar\n";
-        cout << "Pilih : ";
+    do{
+        cout << endl << "=================================" << endl;
+        cout << "SMART CAMPUS NAVIGATION SYSTEM" << endl;
+        cout << "=================================" << endl;
+        cout << "1. Registrasi" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. Cari Akun" << endl;
+        cout << "4. Tambah Riwayat" << endl;
+        cout << "5. Tampil Riwayat" << endl;
+        cout << "6. Ambil Antrian Konsultasi" << endl;
+        cout << "7. Layani Antrian" << endl;
+        cout << "8. Tampil Struktur Organisasi" << endl;
+        cout << "9. Navigasi Kampus (Dijkstra)" << endl;
+        cout << "10. Tambah KRS" << endl;
+        cout << "11. Undo KRS" << endl;
+        cout << "12. Tampil KRS" << endl;
+        cout << "13. Tambah Prioritas Layanan" << endl;
+        cout << "14. Layani Prioritas" << endl;
+        cout << "0. Keluar" << endl;
+        cout << endl << "Pilih : ";
+
         cin >> pilih;
 
         switch(pilih){
-
         case 1:
             registrasi();
             break;
@@ -379,28 +344,28 @@ int main() {
             break;
 
         case 3:
-            cariAkun();
+            cari_akun();
             break;
 
         case 4:
-            tambahRiwayat();
+            tambah_riwayat();
             break;
 
         case 5:
-            tampilRiwayat();
+            tampil_riwayat();
             break;
 
         case 6:
-            ambilAntrian();
+            ambil_antrian();
             break;
 
         case 7:
-            layaniAntrian();
+            layani_antrian();
             break;
 
         case 8:
-            cout << "\n=== STRUKTUR ORGANISASI ===\n";
-            tampilTree(rektor);
+            cout << endl << "=== STRUKTUR ORGANISASI ===" << endl;
+            tampil_tree(rektor);
             break;
 
         case 9:
@@ -408,27 +373,26 @@ int main() {
             break;
 
         case 10:
-            tambahMK();
+            tambah_mk();
             break;
 
         case 11:
-            undoMK();
+            undo_mk();
             break;
 
         case 12:
-            tampilKRS();
+            tampil_krs();
             break;
 
         case 13:
-            tambahPrioritas();
+            tambah_prioritas();
             break;
 
         case 14:
-            layaniPrioritas();
+            layani_prioritas();
             break;
         }
 
-    } while(pilih != 0);
-
+    }while(pilih != 0);
     return 0;
 }
