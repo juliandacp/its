@@ -225,7 +225,7 @@ body.dark .navbar {
 
 /* Hero */
 .intro {
-    max-width: 470px;
+    max-width: 430px;
     margin-top: 2.7rem;
     color: var(--muted);
     font-size: 1.7rem;
@@ -794,7 +794,7 @@ footer {
     }
 
     .intro {
-        max-width: 470px;
+        max-width: 430px;
         margin-top: 2.3rem;
         font-size: 1.5rem;
         line-height: 1.8;
