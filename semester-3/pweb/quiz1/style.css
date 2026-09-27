@@ -155,12 +155,12 @@ body.dark .navbar {
     border-radius: 2px;
 }
 
-/* =Home */
+/* Home */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: auto;
     padding-top: 15rem;
-    padding-bottom: 7rem;
+    padding-bottom: 8rem;
     display: flex;
     align-items: flex-start;
 }
@@ -168,7 +168,6 @@ body.dark .navbar {
 .hero-inner {
     position: relative;
     width: min(1280px, calc(100% - 80px));
-    min-height: 650px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 52% 48%;
@@ -219,7 +218,7 @@ body.dark .navbar {
 
 /* Hero */
 .intro {
-    max-width: 610px;
+    max-width: 580px;
     margin-top: 2.7rem;
     color: var(--muted);
     font-size: 1.7rem;
