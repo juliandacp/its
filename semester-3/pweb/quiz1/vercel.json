@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/quiz1", "destination": "/index.html" },
+    { "source": "/quiz1/", "destination": "/index.html" },
+    { "source": "/quiz1/profile", "destination": "/profile.html" },
+    { "source": "/quiz1/hometown", "destination": "/hometown.html" },
+    { "source": "/quiz1/food", "destination": "/food.html" },
+    { "source": "/quiz1/tourist", "destination": "/tourist.html" },
+    { "source": "/quiz1/:path*", "destination": "/:path*" }
+  ]
+}
