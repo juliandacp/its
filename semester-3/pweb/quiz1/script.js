@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // Typing Effect
     const typedRole = document.getElementById("typedRole");
     if(typedRole){

@@ -53,7 +53,6 @@ button {
     font-family: inherit;
 }
 
-
 /* Navbar */
 .site-header {
     position: fixed;
@@ -213,7 +212,6 @@ body.dark .navbar {
 .typing-cursor {
     margin-left: 2px;
     color: #6c7585;
-
     animation: blink 0.75s steps(1) infinite;
 }
 
@@ -424,7 +422,6 @@ body.dark .glow-circle {
     box-shadow:
         0 22px 55px rgba(15, 23, 42, 0.14),
         0 0 0 1px rgba(216, 220, 227, 0.8);
-
     overflow: hidden;
 }
 
@@ -662,7 +659,6 @@ body.dark .info-icon {
     font-weight: 700;
     letter-spacing: 0.15em;
 }
-
 
 /* Food & Tourist */
 .food-grid,
