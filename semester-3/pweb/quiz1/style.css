@@ -535,7 +535,7 @@ body.dark .info-icon {
     letter-spacing: -0.065em;
 }
 
-/* =Page Section */
+/* Page Section */
 .page-section {
     padding-top: 16rem;
     padding-bottom: 7rem;
@@ -664,7 +664,7 @@ body.dark .info-icon {
 }
 
 
-/* =Food & Tourist */
+/* Food & Tourist */
 .food-grid,
 .tourist-grid {
     display: grid;
@@ -728,6 +728,14 @@ body.dark .info-icon {
     font-size: 1.25rem;
     line-height: 1.4;
     text-align: center;
+}
+
+.food-description {
+    margin-top: 0.8rem;
+    color: var(--muted);
+    font-size: 1.3rem;
+    line-height: 1.7;
+    text-align: justify;
 }
 
 /* Footer */
