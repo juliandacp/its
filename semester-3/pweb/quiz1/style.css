@@ -229,6 +229,7 @@ body.dark .navbar {
     font-size: 1.7rem;
     line-height: 1.85;
     letter-spacing: -0.01em;
+    text-align: justify;
 }
 
 .hero-actions {
