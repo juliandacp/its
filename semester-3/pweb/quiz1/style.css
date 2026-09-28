@@ -556,6 +556,7 @@ body.dark .info-icon {
 
 .page-intro p {
     margin-bottom: 2rem;
+    text-align: justify;
 }
 
 .page-intro p:last-child {
@@ -651,6 +652,7 @@ body.dark .info-icon {
     margin-bottom: 1.5rem;
     color: var(--muted);
     line-height: 1.8;
+    text-align: justify;
 }
 
 .mini-label {
